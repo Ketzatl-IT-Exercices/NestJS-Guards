@@ -6,7 +6,12 @@ export class EcoloGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    console.log("You're Inside Ecologuard....");
-    return true;
+    const req = context.switchToHttp().getRequest();
+    console.log("\n You're Inside Ecologuard....  / body", req.body);
+    if (req.body.vehicle !== 'bike') {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
