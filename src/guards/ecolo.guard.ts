@@ -13,7 +13,8 @@ export class EcoloGuard implements CanActivate {
         const greenVehicles = this.reflector.get<string[]>('greenVehicles', context.getHandler())
         const req = context.switchToHttp().getRequest();
         console.log("\n You're Inside Ecologuard....  / greenVehicles", greenVehicles);
-        if (req.body.vehicle !== 'bike') {
+        const isGreenVehicle = greenVehicles.includes(req.body.vehicle)
+        if (!isGreenVehicle) {
             return false;
         } else {
             return true;
